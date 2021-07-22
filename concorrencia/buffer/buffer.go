@@ -9,8 +9,9 @@ func rotina(ch chan int) {
 	ch <- 1
 	ch <- 2
 	ch <- 3
+	fmt.Println("Executou!") //Ele é executado antes dos channels,
+	//as vezes ele pode ser executado no meio por que chamou um channel só
 	ch <- 4
-	fmt.Println("Executou!") //as vezes pode ser executado antes dos channels
 	ch <- 5
 	ch <- 6
 }
