@@ -39,11 +39,11 @@ func main() {
 	c := make(chan int, 30)
 
 	//Cap(c) indica a capacidade do channel que no caso foi setado 30
-	//Deixa preparado 30 channels no for para serem executados
+	//Deixa marcado um ponto para começar a executar 30 channels
 	go primos(cap(c), c)
 
-	//Pega channel por channel
-	//primos() vai ser executado aos poucos e uma única vez
+	//Começa a executar os channels
+	//primos() vai ser executado aos poucos e uma única vez a medida que se passa o laço
 	//Cada passada do looping ele vai executar o for do primos() até voltar no c <- primo
 	for primo := range c {
 		fmt.Printf("%d ", primo)
