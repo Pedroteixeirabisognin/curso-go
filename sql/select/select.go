@@ -1,0 +1,35 @@
+package main
+
+import (
+	"database/sql"
+	"fmt"
+	"log"
+
+	_ "github.com/go-sql-driver/mysql"
+)
+
+type usuario struct {
+	id   int
+	nome string
+}
+
+func main() {
+	//Driver, usuario e senha com "@/" no final
+	db, err := sql.Open("mysql", "root:MySql2019!@/testedb")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	rows, err := db.Query("select * from usuarios where id <= ?", 2)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var u usuario
+		rows.Scan(&u.id, &u.nome)
+		fmt.Println(u)
+	}
+}
